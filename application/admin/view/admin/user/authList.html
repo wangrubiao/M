@@ -1,0 +1,112 @@
+<!-- Header -->
+{include file="public/header" /}
+<!-- Header end -->
+<body>
+
+    <div id="wrapper">
+
+  <!-- menu -->
+				{include file="public/menu" /}
+				<!-- menu end -->
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+   		<!-- top -->
+				{include file="public/top" /}
+				<!-- top end -->
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Static Tables</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a>Tables</a>
+                        </li>
+                        <li class="active">
+                            <strong>Static Tables</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+           
+            <div class="row">
+               
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>权限列表</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="table_basic.html#">Config option 1</a>
+                                    </li>
+                                    <li><a href="table_basic.html#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="弹窗">
+                                    <i class="fa fa-plus-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>权限名称</th>
+                                    <th>权限地址</th>
+                                    <th>操 作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <!-- <td><input type="checkbox"  checked class="i-checks" name="input[]"></td> -->
+                                    <td>权限配置</td>
+                                    <td>Admin/user/index</td>
+                                   <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <!-- <td><input type="checkbox"  checked class="i-checks" name="input[]"></td> -->
+                                    <td>权限配置</td>
+                                    <td>Admin/user/index</td>
+                                   <td><a href="table_basic.html#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- footer -->
+{include file="public/footer" /}
+<!-- footer end -->
+
+    <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+
+</body>
+
+</html>

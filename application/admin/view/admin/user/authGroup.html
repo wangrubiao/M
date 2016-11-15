@@ -1,0 +1,92 @@
+<!-- Header -->
+{include file="public/header" /}
+<!-- Header end -->
+
+<body class="fixed-sidebar no-skin-config full-height-layout">
+<div id="wrapper">
+
+<!-- menu --> 
+{include file="public/menu" /} 
+<!-- menu end -->
+<div id="page-wrapper" class="gray-bg">
+<div class="row border-bottom"> 
+  <!-- top --> 
+  {include file="public/top" /} 
+  <!-- top end --> 
+</div>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Outlook view</h2>
+    <ol class="breadcrumb">
+      <li> <a href="index.html">Home</a> </li>
+      <li> <a>Layouts</a> </li>
+      <li class="active"> <strong>Outlook view</strong> </li>
+    </ol>
+  </div>
+  <div class="col-lg-2"> </div>
+</div>
+<div class="fh-breadcrumb">
+  <div class="fh-column">
+    <div class="full-height-scroll">
+      <ul class="list-group elements-list">
+         {foreach name="group" item="vo"}
+          <li class="list-group-item li-cursor" data-id="{$vo.id}"> <a data-toggle="tab" href="#tab-{$vo.id}">
+      	 	<small class="pull-right text-muted">管理部</small> <strong>{$vo.aname}</strong> 
+           </a></li>
+          {/foreach}
+      </ul>
+      
+    </div>
+  </div>
+  <div class="full-height">
+    <div class="full-height-scroll white-bg border-left">
+      <div class="element-detail-box">
+        <div class="tab-content">
+        <!-- 权限列表 -->
+        
+  			<!-- 权限列表  end -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- footer --> 
+{include file="public/footer" /} 
+<!-- footer end -->
+
+    <script>
+        $(document).ready(function(){
+        	layui.use('layer', function(){
+			var layer = layui.layer;
+            //ajax保存权限
+            $('body').on('click','button',function(){
+            	var id = $('#group_id').val();
+            	var range_id = $("input[name='input']:checked").map(function(index,elem) {
+      			  return $(elem).val();
+      			}).get().join(',');
+            	var url = "{:url('group/rangeEdit')}";
+            	$.post(url,{id:id,range_id:range_id},function(data){
+            		alert(data);
+            		if(data==true){			
+            			layer.msg("更新成功");
+            		}
+            	});
+            });
+            //点击角色切换
+            $('.list-group-item').on('click',function(){
+            	$('.list-group-item').removeClass('active');
+            	$(this).addClass('active');
+            	var id = $(this).data('id');
+            	var url = "{:url('group/index')}";
+            	$.post(url,{id:id},function(data){
+            		$('.tab-content').html(data);
+            	});
+            });
+        });
+        });
+    </script>
+    
+</body>
+</html>

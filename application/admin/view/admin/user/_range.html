@@ -1,0 +1,72 @@
+  <div id="tab-1" class="tab-pane active">
+            <div class="pull-right">
+              <div class="tooltip-demo">
+                <button class="btn btn-white btn-xs" data-toggle="tooltip" data-placement="left" title="Plug this message"><i class="fa fa-plug"></i> Plug it</button>
+                <button class="btn btn-white btn-xs" data-toggle="tooltip" data-placement="top" title="Mark as read"><i class="fa fa-eye"></i> </button>
+                <button class="btn btn-white btn-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as important"><i class="fa fa-exclamation"></i> </button>
+                <button class="btn btn-white btn-xs" data-toggle="tooltip" data-placement="top" title="" data-original-title="Move to trash"><i class="fa fa-trash-o"></i> </button>
+              </div>
+            </div>
+            <div class="small text-muted"> <i class="fa fa-clock-o"></i> Monday, 21 May 2014, 10:32 am </div>
+            <h1>{$group.aname}</h1>
+         <!--   {foreach name="range" item="vo"}
+            <ul class="tree-dir mt10">
+              <li class="level1 level1-end">
+              	<span class="chk-wrap bold">
+              	  <input id="469714" class="check-box" type="checkbox" value="469714">
+              	  <label for="469714">{$vo.title}</label>
+                </span>
+              </li>
+            </ul>
+            {/foreach}
+             --> 
+           {foreach name="range" item="vo"}
+           {eq name="vo['type']" value="1"}
+            <ul class="tree-dir mt10 todo-list m-t ui-sortable">
+              <li class="level1 "> <span class="chk-wrap bold">
+                <input type="checkbox"  class="i-checks" name="input" value="{$vo.id}">
+                <label class="m-l-xs" for="100">{$vo.title}</label>
+                </span>
+                {foreach name="range" item="v"}
+                 {if condition="$v['fid'] eq $vo['id'] "}
+                <ul>
+                  <li class="level2"> <span class="chk-wrap x-tree-lv2">
+                    <input type="checkbox"  class="i-checks" name="input" value="{$v.id}">
+                    <label for="107">{$v.title}</label>
+                    </span>
+                    <ul>
+                      <li class="level3  level3-end ">
+                       {foreach name="range" item="c"}
+                      {if condition="$c['fid'] eq $v['id'] "}
+                        <span class="chk-wrap">  
+                        <input type="checkbox"  class="i-checks" name="input" value="{$c.id}">
+                        <span class="m-l-xs m-level3">{$c.title}</span>
+                        </span> 
+                       {/if}
+                       	{/foreach}
+                       </li>
+                    </ul>          	  
+                  </li>
+                </ul>
+                {/if}
+                {/foreach}
+              </li>
+            </ul>
+            {/eq}
+            {/foreach}
+             <div class="m-t-lg">
+              <p> <span><i class="fa fa-paperclip"></i>权限分配需谨慎，错误分配导致悲剧!</span></p>
+               <input type="hidden" namn="group_id" id="group_id" value="{$group.id}" />
+              <div class="button">
+                <button class="btn btn-primary" type="button"><i class="fa fa-check"></i>&nbsp;Submit</button>
+              </div>
+            </div>
+          </div>
+ <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>

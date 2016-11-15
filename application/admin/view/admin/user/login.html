@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W+ | Login</title>
+<link href="http://{$Think.config.PUBLIC}/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="http://{$Think.config.PUBLIC}/font-awesome/css/font-awesome.css"
+	rel="stylesheet">
+<link href="http://{$Think.config.PUBLIC}/css/animate.css"
+	rel="stylesheet">
+<link href="http://{$Think.config.PUBLIC}/css/style.css"
+	rel="stylesheet">
+<link href="http://{$Think.config.PUBLIC}/lib/layui/css/layui.css"
+	rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+	<div class="middle-box text-center loginscreen animated fadeInDown">
+		<div>
+			<div>
+				<h1 class="logo-name">W+</h1>
+			</div>
+			<h3>Welcome to W+</h3>
+			<p>如果你还在玩Ie6/7/8...</p>
+			<p>请悄悄地离开，我将默默拜拜...</p>
+			<form class="m-t" role="form" id="form" action="{:url('User/index')}"
+				method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" name="username"
+						id="username" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" name="password"
+						id="password" placeholder="Password">
+				</div>
+				<div class="form-group">
+					<!--<input type="hidden" name="__token__" value="{$Request.token}" />-->
+				</div>
+				<button type="button" class="btn btn-primary block full-width m-b">登
+					录</button>
+				<!--<a href="javascript:;"><small>忘记密码?</small></a>
+      <p class="text-muted text-center"><small>Do not have an account?</small></p>-->
+				<a class="btn btn-sm btn-white btn-block" href="#">Create an
+					account</a>
+			</form>
+			<p class="m-t">
+				<small>W+ &copy; 2016</small>
+			</p>
+		</div>
+	</div>
+
+	<!-- Mainly scripts -->
+	<script src="http://{$Think.config.PUBLIC}/js/jquery-2.1.1.js"></script>
+	<script src="http://{$Think.config.PUBLIC}/js/bootstrap.min.js"></script>
+	<!-- layui scripts -->
+	<script src="http://{$Think.config.PUBLIC}/lib/layui/layui.js"></script>
+	<script>
+$(document).ready(function(){
+	$('button').on('click', function(){
+	layui.use('layer', function(){
+	  var layer = layui.layer;
+	  var user = $('#username').val();
+	  var pass = $('#password').val();
+	  $.ajax({
+			url:"{:url('login')}"
+			,type:'post'
+			,data:{username:user,password:pass}
+			,success:function(result){
+				var index = layer.load(3, {
+					shade: [0.9,'#fff'] //0.1透明度的白色背景
+				});
+				if(result==true){
+					$('form').submit();
+				}else{
+					layer.msg(result, {
+						icon: 2
+						,time: 3000
+					});
+					layer.close(index);
+				}
+				}
+			});
+			
+	  });
+	});   
+});             
+    
+
+</script>
+</body>
+</html>
