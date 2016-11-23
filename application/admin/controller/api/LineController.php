@@ -1,6 +1,6 @@
 <?php
 
-namespace app\admin\controller\api;
+namespace app\admin\controller\api; 
 
 use think\Controller;
 use think\Request;
