@@ -1,0 +1,262 @@
+<!-- Header -->
+{include file="public/header" /}
+<!-- Header end -->
+<body>
+
+    <div id="wrapper">
+
+  <!-- Header -->
+				{include file="public/menu" /}
+				<!-- Header end -->
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+   		<!-- Header -->
+				{include file="public/top" /}
+				<!-- Header end -->
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Static Tables</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a>Tables</a>
+                        </li>
+                        <li class="active">
+                            <strong>Static Tables</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+           
+            <div class="row">
+               
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>权限列表</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="table_basic.html#">Config option 1</a>
+                                    </li>
+                                    <li><a href="table_basic.html#">Config option 2</a>
+                                    </li>
+                                </ul>
+                               
+                                {in name="5" value="$rangeList" }
+                                 <a class="add" title="创建用户">
+                                    <i class="fa fa-plus-square"></i>
+                                 </a>
+                                 {/in}
+				
+                               
+                                
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                               		<th>账 号</th>
+                                    <th>名 称</th>
+                                   
+                                    <th>邮 箱</th>
+                                    <th>最近访问</th>
+                                    <th>角色分配</th>
+                                    
+                                    {in name="7" value="$rangeList" }
+                                    <th>操 作</th>
+                                    {/in}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach name="list" item="vo"}
+                                <tr class="e{$vo.uid}">
+                                    <td>{$vo.uid}</td>
+                 	               <td class="username">{$vo.username}</td>
+                 	                
+                 	                  <td class="name">{$vo.name}</td>
+                 	                 <td class="mailbox">{$vo.mailbox}</td>
+                                    <td>{$vo.logintime|date='Y-m-d h:i:s',###}</td>
+                                     <td class="username"><a href="javasrcipt:;" class="expgroup" title="角色分配" data-uid="{$vo.uid}"><i class="fa fa-smile-o text-navy"></i></a></td>
+                                    {in name="7" value="$rangeList" }
+                                     
+                                   <td>
+                                   <a href="javasrcipt:;" title="编辑用户" class="edit" data-id="{$vo.uid}" data-name="{$vo.name}" data-username="{$vo.username}" data-mailbox="{$vo.mailbox}" data-password="{$vo.password}"><i class="fa fa-pencil-square-o text-navy"></i></a>
+                                   </td>
+                               		{/in}
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                          <!-- 模态框 编辑  -->
+                        <div class="ibox-content ibox-from" style="display:none;">
+                        <h2>注意事项：</h2>
+                            <p>你知道吗？管理员是不支持删除的，不需要可以选择冻结.</p>
+                                <form role="form" id="form">
+                                    <div class="form-group"><label>用户账号</label> <input type="text" placeholder="8-12位英文或字母..." class="form-control" name="username"></div>
+                                    <div class="form-group"><label>用户昵称</label> <input type="text" placeholder="Ta是谁..." class="form-control" name="name"></div>
+                                    <div class="form-group"><label>电子邮箱</label> <input type="text" placeholder="邮箱其实可以不填..." class="form-control" name="mailbox"></div>
+                                    <div class="form-group"><label>登录密码</label> <input type="text" placeholder="请设置复杂密码..." class="form-control" name="password"></div>
+                                 
+                                </form>
+                        </div>
+                       <!-- 模态框 编辑 end -->
+                        <!-- 模态框 角色分配  -->
+                        <div class="ibox-content ibox-group" style="display:none;">
+						  <div class="form-group grouplist">
+                               
+                           </div>
+                        </div>
+                       <!-- 模态框 角色分配 end -->
+                        </div> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- footer -->
+{include file="public/footer" /}
+<!-- footer end -->
+    <script>
+        $(document).ready(function(){
+        	layui.use('layer', function(){
+        	//编辑用户
+        	$(".edit").on('click',function(){
+        		$("input[name='username']").attr("disabled","disabled")
+        		$("#form").data("id",$(this).data("id"));
+        		$("input[name='password']").attr("placeholder","不修改密码请留空...");
+        		$.action($(this),"edit");
+        	});
+        	//创建用户
+        	$(".add").on('click',function(){
+        		$("input[name='username']").removeAttr("disabled");
+        		$("input[name='password']").val($(this).data("password"));
+        		$.action($(this),"add");
+        	});
+        	$.action = function(obj,type) {
+ 				//模态框数据初始化
+        		var title = $(obj).attr("title");
+        		$("input[name='username']").val($(obj).data("username"));
+        		$("input[name='name']").val($(obj).data("name"));
+        		$("input[name='mailbox']").val($(obj).data("mailbox"));
+            		var index = layer.open({
+            			  type: 1,
+            			  title: title,
+            			  shadeClose: true,
+            			  shade: 0.8,
+            			  shift: 3,
+            			  content: $('.ibox-from'),
+            			  btn: ['确 定', '取 消']
+            			  ,yes: function(index, layero){
+            				  if(type == "edit"){
+            					  var id = $("#form").data("id");
+            					  var url = "{:url('group/editUser')}";
+            					  $.excAjax(id,url,index);
+            	        	   }else{
+            	        		  var id = 0;
+              					  var url = "{:url('group/createUser')}";
+              					  $.excAjax(id,url,index);
+            	        		}
+            			  }
+            		}); 
+            	 
+  			}
+        	//模态框Ajax提交操作
+        	$.excAjax = function(id,url,index){
+				  var username = $("input[name='username']").val();
+				  var password = $("input[name='password']").val();
+				  var name     = $("input[name='name']").val();
+				  var mailbox  = $("input[name='mailbox']").val();
+				  $.post(url,{id:id,username:username,password:password,name:name,mailbox:mailbox},function(data){
+        				if(data['status'] == 1){
+        					if(id==0){
+        						location.reload();
+        						layer.msg(data['content'], {icon: 1});  
+        					}else{
+        						$(".e"+id+" .name").text(data['name']);
+        						$(".e"+id+" .mailbox").text(data['mailbox']);
+            					layer.msg(data['content'], {icon: 1});  
+        					}
+        					layer.close(index);
+        				}else{
+        					layer.msg(data['content'],{icon: 2});
+        				}
+        				
+        			});
+        	}
+        	//捕抓鼠标This
+        	$(".expgroup,.edit,.add").mouseenter(function(){
+        		var title = $(this).attr('title');
+        		var index = layer.tips(title, this, {
+        			  tips: [1, '#3595CC'],
+        			  time: 10000,
+        		});
+            	$(this).mouseleave(function(){
+            		layer.close(index);
+            	});
+        	});
+        	//角色分配
+        	$(".expgroup").on("click",function(){
+        		var title = $(this).attr("title");
+        		var uid = $(this).data('uid');
+        		//返回所有角色组
+        		var url = "{:url('group/choseGroup')}";
+        		var str = "";
+        		$.post(url,{uid:uid},function(data){
+        			$.each(data,function(key,value){
+        				str += '<div class="i-checks"><label>';
+        				str += '<input name="input" type="checkbox" '+value['state']+' value="'+value['id']+'">&nbsp;'+value['aname'];
+        				str += '</label></div>';
+        			});
+        			$('.grouplist').html(str);
+        			$('.i-checks').iCheck({
+                        checkboxClass: 'icheckbox_square-green',
+                        radioClass: 'iradio_square-green',
+                    });
+        		});
+        		var col = layer.open({
+      			  type: 1,
+      			  title: title,
+      			  shadeClose: true,
+      			  shade: 0.8,
+      			  shift: 3,
+      			  content: $('.ibox-group'),
+      			  btn: ['保 存', '取 消']
+      			  ,yes: function(index, layero){
+      				var group_id = [];
+      				$("input[name='input']:checked").each(function(index){
+            		    if(this.checked){
+            		    	group_id[index] = $(this).val();
+            		    }
+            		 });
+      				$.post(url,{uid:uid,type:1,group_id:group_id},function(data){
+      					layer.msg(data['content'], {icon: 1});  
+      				});
+      				layer.close(col);
+      			  }
+      			}); 
+        	});
+
+        	
+            
+        	 });
+        });
+    </script>
+</body>
+
+</html>

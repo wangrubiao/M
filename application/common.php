@@ -11,8 +11,5 @@
 
 // 应用公共文件
 function p($array) {
-	echo "<per>";
-	echo print_r ( $array );
-	echo "</per>";
+	dump($array);
 }
-;

@@ -41,7 +41,7 @@
                 <div class="col-lg-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>权限列表</h5>
+                            <h5>商品列表</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -56,8 +56,8 @@
                                     </li>
                                 </ul>
                                
-                                {in name="5" value="$rangeList" }
-                                 <a class="add" title="创建角色">
+                                {in name="16" value="$rangeList" }
+                                 <a class="add" title="新增商品">
                                     <i class="fa fa-plus-square"></i>
                                  </a>
                                  {/in}
@@ -71,26 +71,26 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                               		<th>角 色</th>
-                                    <th>描 述</th>
-                                    <th>权 限</th>
-                                    <th>状 态</th>
-                                    {in name="7" value="$rangeList" }
+                               		<th>商 品</th>
+                                    <th>单 价</th>
+                                    <th>所属分组</th>
+                                    
+                                    {in name="15" value="$rangeList" }
                                     <th>操 作</th>
                                     {/in}
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {foreach name="list" item="vo"}
-                                <tr class="e{$vo.id}">
-                                    <td>{$vo.id}</td>
-                 	                <td class="aname">{$vo.aname}</td>
-                 	                 <td class="describe">{$vo.describe}</td>
-                 	                 <td>{$vo.aname}</td>
-                                    <td>{$vo.range_id}</td>
-                                    {in name="7" value="$rangeList" }
+                                <tr class="e{$vo.gid}">
+                                    <td class="gid-{$vo.gid}">{$vo.gid}</td>
+                                     <td class="name-{$vo.gid}">{$vo.name}</td>
+                 	               <td class="gds_price-{$vo.gid}">{$vo.gds_price}</td>
+                                     <td class="group-{$vo.gid}">{$vo.group}</td>
+                                    {in name="15" value="$rangeList" }
+                                     
                                    <td>
-                                   <a href="javasrcipt:;" title="编辑角色" class="edit" data-id="{$vo.id}" data-aname="{$vo.aname}" data-describe="{$vo.describe}"><i class="fa fa-pencil-square-o text-navy"></i></a>
+                                   <a href="javasrcipt:;" title="商品编辑" class="edit" data-id="{$vo.gid}"><i class="fa fa-pencil-square-o text-navy"></i></a>
                                    </td>
                                		{/in}
                                 </tr>
@@ -99,15 +99,22 @@
                             </table>
                           <!-- 模态框 编辑  -->
                         <div class="ibox-content ibox-from" style="display:none;">
-                        <h2>注意事项：</h2>
-                            <p>角色默认权限为空，创建成功后请在权限配置进行分配.</p>
+                       <!--   <h2>注意事项：</h2>
+                            <p>你知道吗？管理员是不支持删除的，不需要可以选择冻结.</p>-->
                                 <form role="form" id="form">
-                                    <div class="form-group"><label>角色名称</label> <input type="text" placeholder="例如：文章专员、客服..." class="form-control" name="aname"></div>
-                                    
-                                    <div class="form-group"><label>角色描述</label> <input type="text" placeholder="说说这角色都能干啥？" class="form-control" name="describe"></div>
+                                    <div class="form-group"><label>商品名称</label> <input type="text" placeholder="商品名称..." class="form-control" name="name"></div>
+                                    <div class="form-group"><label>商品价格</label> <input type="text" placeholder="商品单价..." class="form-control" name="gds_price"></div>
+                                    <div class="form-group"><label>商品分组</label> <input type="text" placeholder="商品分组" class="form-control" name="group"></div>
                                 </form>
                         </div>
                        <!-- 模态框 编辑 end -->
+                        <!-- 模态框 角色分配  -->
+                        <div class="ibox-content ibox-group" style="display:none;">
+						  <div class="form-group grouplist">
+                               
+                           </div>
+                        </div>
+                       <!-- 模态框 角色分配 end -->
                         </div> 
                         
                     </div>
@@ -120,19 +127,23 @@
     <script>
         $(document).ready(function(){
         	layui.use('layer', function(){
+        	//编辑商品
         	$(".edit").on('click',function(){
         		$("#form").data("id",$(this).data("id"));
         		$.action($(this),"edit");
         	});
+        	//创建商品
         	$(".add").on('click',function(){
         		$.action($(this),"add");
         	});
         	$.action = function(obj,type) {
  				//模态框数据初始化
         		var title = $(obj).attr("title");
-        		$("input[name='aname']").val($(obj).data("aname"));
-        		$("input[name='describe']").val($(obj).data("describe"));
-            		layer.open({
+ 				var gid = $(obj).data("id");
+        		$("input[name='name']").val($(".name-"+gid).text());
+        		$("input[name='gds_price']").val($(".gds_price-"+gid).text());
+        		$("input[name='group']").val($(".group-"+gid).text());
+            		var index = layer.open({
             			  type: 1,
             			  title: title,
             			  shadeClose: true,
@@ -142,12 +153,12 @@
             			  btn: ['确 定', '取 消']
             			  ,yes: function(index, layero){
             				  if(type == "edit"){
-            					  var id = $("#form").data("id");
-            					  var url = "{:url('group/groupEdit')}";
-            					  $.excAjax(id,url,index);
+            					  //var id = $("#form").data("id");
+            					  var url = "{:url('linegoods/update')}";
+            					  $.excAjax(gid,url,index);
             	        	   }else{
             	        		  var id = 0;
-              					  var url = "{:url('group/groupAdd')}";
+              					  var url = "{:url('linegoods/insert')}";
               					  $.excAjax(id,url,index);
             	        		}
             			  }
@@ -156,29 +167,39 @@
   			}
         	//模态框Ajax提交操作
         	$.excAjax = function(id,url,index){
-				  var aname = $("input[name='aname']").val();
-        	   	  var describe = $("input[name='describe']").val();
-				  $.post(url,{id:id,aname:aname,describe:describe},function(data){
+				  var name = $("input[name='name']").val();
+				  var gds_price = $("input[name='gds_price']").val();
+				  var group = $("input[name='group']").val();
+				  $.post(url,{gid:id,name:name,gds_price:gds_price,group:group},function(data){
         				if(data['status'] == 1){
         					if(id==0){
         						location.reload();
         						layer.msg(data['content'], {icon: 1});  
-            					layer.close(index);
         					}else{
-        						$(".e"+id+" .aname").text(aname);
-            					$(".e"+id+" .describe").text(describe);
+        						$(".e"+id+" .name-"+id).text(data['name']);
+        						$(".e"+id+" .gds_price-"+id).text(data['gds_price']);
+        						$(".e"+id+" .group-"+id).text(data['group']);
             					layer.msg(data['content'], {icon: 1});  
-            					layer.close(index);
         					}
+        					layer.close(index);
         				}else{
-        					layer.msg(data['content']);
+        					layer.msg(data['content'],{icon: 2});
         				}
+        				
         			});
         	}
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-                radioClass: 'iradio_square-green',
-            });
+        	//捕抓鼠标This
+        	$(".expgroup,.edit,.add").mouseenter(function(){
+        		var title = $(this).attr('title');
+        		var index = layer.tips(title, this, {
+        			  tips: [1, '#3595CC'],
+        			  time: 10000,
+        		});
+            	$(this).mouseleave(function(){
+            		layer.close(index);
+            	});
+        	});       	
+            
         	 });
         });
     </script>

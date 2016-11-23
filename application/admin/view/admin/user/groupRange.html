@@ -44,7 +44,7 @@
         <div class="tab-content">
         <!-- 权限列表 -->
         
-  			<!-- 权限列表  end -->
+  		<!-- 权限列表  end -->
 
         </div>
       </div>
@@ -60,17 +60,17 @@
         $(document).ready(function(){
         	layui.use('layer', function(){
 			var layer = layui.layer;
+			var url = "{:url('group/index')}";
             //ajax保存权限
             $('body').on('click','button',function(){
             	var id = $('#group_id').val();
             	var range_id = $("input[name='input']:checked").map(function(index,elem) {
       			  return $(elem).val();
       			}).get().join(',');
-            	var url = "{:url('group/rangeEdit')}";
-            	$.post(url,{id:id,range_id:range_id},function(data){
-            		alert(data);
+            	var type = 'update';
+            	$.post(url,{id:id,range_id:range_id,type:type},function(data){
             		if(data==true){			
-            			layer.msg("更新成功");
+            			layer.msg("更新成功",{icon: 1});
             		}
             	});
             });
@@ -79,8 +79,8 @@
             	$('.list-group-item').removeClass('active');
             	$(this).addClass('active');
             	var id = $(this).data('id');
-            	var url = "{:url('group/index')}";
-            	$.post(url,{id:id},function(data){
+            	var type = 'load';
+            	$.post(url,{id:id,type:type},function(data){
             		$('.tab-content').html(data);
             	});
             });

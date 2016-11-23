@@ -10,13 +10,12 @@ use app\admin\model\User as UserModel;
 
 class LoginController extends Controller {
 	public function index(Request $request) {
-		dump ( $request->session () );
-		echo 'ÄãºÃºÃ';
+		//dump ( $request->session () );
 		return view ( 'admin/user/login' );
 	}
 	public function login() {
 		extract ( input () );
-		$result = $this->validate ( input (), 'User' );
+		$result = $this->validate ( input (), 'Admin.login' );
 		if (true !== $result) {
 			return $result;
 		}
