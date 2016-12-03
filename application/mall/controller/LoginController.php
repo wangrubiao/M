@@ -25,7 +25,7 @@ class LoginController extends CommonController
    		is_ajax();
    		extract(input());
    		// 判断是否登陆成功
-   		if (count($request->session ( 'info.uid' )) != 1) {
+   		if (count($request->session ( 'mall_info.uid' )) != 1) {
    			$data['status'] = 0;
    		}else{
    			$data['status'] = 1;

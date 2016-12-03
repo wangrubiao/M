@@ -64,13 +64,10 @@
                 </td>
 
                 <td><div class="products">
-                    <figure><a class="abc" href="#" target="_blank"><img src="{$vo.img_url}" data-origin="http://z3.tuanimg.com/imagev2/trade/800x800.ef97f14b841b8b2a5315967e00bce4a3.100x100.jpg" data-stat-dealid="3561149"></a></figure>
-                    <h3> <a href="http://out.zhe800.com/jump?deal_id=3561149&url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze151020141220000658&jump_source=1&qd_key=qyOwt6Jn" target="_blank">嬉皮少女2015秋冬新款修身显瘦百搭牛仔裤小脚女裤铅笔裤女长裤潮</a> <em class="pro_ppt" title="品牌团"></em><em class="return" title="本商品支持8天无理由退货"></em><em class="audit0" title="本商品由折800买手砍价"></em> </h3>
+                    <figure><a class="abc" href="#" target="_blank"><img src="{$vo.img_url}"></a></figure>
+                    <h3> <a href="#" target="_blank">嬉皮少女2015秋冬新款修身显瘦百搭牛仔裤小脚女裤铅笔裤女长裤潮</a> <em class="pro_ppt" title="品牌团"></em><em class="return" title="本商品支持8天无理由退货"></em><em class="audit0" title="本商品由折800买手砍价"></em> </h3>
                     <div class="type">
                       <div class="icon-wrapper"><span class="icon-sku-edit" data-behavior="cart-item-modify">修改</span></div>
-                      <input type="hidden" name="cart_price" value="69">
-                      <input type="hidden" name="sku_num" value="1-1001:2-1108">
-                      <input type="hidden" name="sku_num_new" value="1-1001:2-1108">
                       <div data-prop="sku-desc">颜色:{$vo.spec_name}</div>
                       <div data-prop="sku-desc">尺码:{$vo.focus_name}</div>
                       <div class="nubA item-modify-wrapper"></div>
@@ -208,9 +205,9 @@ $(document).ready(function(){
 				}
 			});
 		});
-        /*****
+        /**
          *增减数量
-         ****/
+        */
         $("tbody tr").mouseover(function(){
            var count = $(".number p",this).data("total-count");
            var sku_value = $(".number p input",this);
