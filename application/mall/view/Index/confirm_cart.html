@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta charset="utf-8">
+ <title>我的订单</title>
+ <meta name="keywords" content="">
+ <meta name="description" content="#####">
+ <meta name="renderer" content="webkit">
+ <meta name="authenticate" content="######">
+ <link rel="stylesheet" href="http://{$Think.config.PUBLIC}/mall/style/confirmorder.css">
+ <script src="AreaData_min.js"></script>
+<script src="./confirm_cart_files/jquery1.7.2.js"></script>
+ <link rel="stylesheet" type="text/css" href="./confirm_cart_files/api_css.css">
+ </head>
+ <body>
+<!-- Top -->
+{include file="public/top" /}
+<!-- Top end -->
+<header>
+   <div class="area">
+    <div class="l"> <a href="http://www.zhe800.com/"> <img src="./confirm_cart_files/logo2015m.png"></a> <br>
+       折800，精选每日优质淘品</div>
+    <div class="order_r order_c"><i></i></div>
+  </div>
+ </header>
+<article id="usersell" class="area">
+   <section>
+    <h2>确认收货信息</h2>
+    <ul class="address_pub" style="display: block;">
+       <li>
+        <label> <em>*</em> 收货人： </label>
+        <input class="w1 js_receipt" id="receiverName" name="receiverName" type="text" value="">
+      </li>
+       <li class="js_tel">
+        <label> <em>*</em> 手机： </label>
+        <input class="w1 js_mobile" id="mobile" name="mobile" type="text" value="">
+        或 电话
+        <input class="w2 pn1" id="telCode" name="telCode" type="text" value="">
+        -
+        <input class="pn2" id="tel" name="tel" type="text" value="">
+        -
+        <input class="w2 pn3" id="telExtNumber" name="telExtNumber" type="text" value="">
+        <input type="hidden" class="js_phone" value="">
+      </li>
+       <li>
+        <label>邮箱：</label>
+        <input class="w1 js_email" type="text" name="email" value="">
+      </li>
+       <li id="js_selectcity">
+        <label> <em>*</em> 省： </label>
+        <div class="citylists">
+           <p class="txt"> <sup></sup> <span>请选择城市</span> </p>
+           <div class="citylistinfo" style="display:none;">
+            <div class="hd"> <span class="cur">省份</span> <span>城市</span> <span>县区</span> </div>
+            <ul class="provbox">
+               <li>
+                <label>A-G</label>
+                <a pid="110000" href="javascript:void(0)">北京</a> <a pid="500000" href="javascript:void(0)">重庆</a> <a pid="340000" href="javascript:void(0)">安徽</a> <a pid="350000" href="javascript:void(0)">福建</a> <a pid="440000" href="javascript:void(0)">广东</a> <a pid="450000" href="javascript:void(0)">广西</a> <a pid="520000" href="javascript:void(0)">贵州</a> <a pid="620000" href="javascript:void(0)">甘肃</a> </li>
+               <li>
+                <label>H-K</label>
+                <a pid="130000" href="javascript:void(0)">河北</a> <a pid="220000" href="javascript:void(0)">吉林</a> <a pid="230000" href="javascript:void(0)">黑龙江</a> <a pid="320000" href="javascript:void(0)">江苏</a> <a pid="360000" href="javascript:void(0)">江西</a> <a pid="410000" href="javascript:void(0)">河南</a> <a pid="420000" href="javascript:void(0)">湖北</a> <a pid="430000" href="javascript:void(0)">湖南</a> <a pid="460000" href="javascript:void(0)">海南</a> </li>
+               <li>
+                <label>L-S</label>
+                <a pid="310000" href="javascript:void(0)">上海</a> <a pid="140000" href="javascript:void(0)">山西</a> <a pid="150000" href="javascript:void(0)">内蒙古</a> <a pid="210000" href="javascript:void(0)">辽宁</a> <a pid="370000" href="javascript:void(0)">山东</a> <a pid="510000" href="javascript:void(0)">四川</a> <a pid="610000" href="javascript:void(0)">陕西</a> <a pid="630000" href="javascript:void(0)">青海</a> <a pid="640000" href="javascript:void(0)">宁夏</a> </li>
+               <li>
+                <label>T-Z</label>
+                <a pid="120000" href="javascript:void(0)">天津</a> <a pid="330000" href="javascript:void(0)">浙江</a> <a pid="530000" href="javascript:void(0)">云南</a> <a pid="540000" href="javascript:void(0)">西藏</a> <a pid="650000" href="javascript:void(0)">新疆</a> </li>
+             </ul>
+            <ul class="citybox" style="display:none">
+              11111
+             </ul>
+            <ul class="distbox" style="display:none">
+             </ul>
+          </div>
+         </div>
+        <input class="prov" type="hidden" value="">
+        <input class="city" type="hidden" value="">
+        <input class="dist" type="hidden" value="">
+        <label class="w5"> <em>*</em> 邮编： </label>
+        <input class="js_postcode" id="postCode" name="postCode" type="text" value="">
+      </li>
+       <li>
+        <label> <em>*</em> 详细地址： </label>
+        <input class="w3 js_xxaddress" id="address" name="address" type="text" value="">
+      </li>
+       <li class="serdefadsbox">
+        <label>&nbsp;</label>
+        <input type="checkbox">
+        设为默认地址 <span>(设置为默认地址后，系统将在下次购买时自动选中该收货地址)</span> </li>
+       <li class="errbox"></li>
+       <li class="bbox">
+        <input type="button" value="保存收货信息">
+      </li>
+     </ul>
+    <ul class="arslis js_alist">
+     </ul>
+    <p class="arset" style="display:none"> <em> <a href="javascript:void(0);" class="js_adraddbtn"> <b>+</b> 使用新地址 </a> </em> <a href="javascript:void(0);" class="js_adr_more" style="display: none;">更多地址↓</a> </p>
+  </section>
+   <form accept-charset="UTF-8" action="http://shop.zhe800.com/n/orders/create_cart_order" method="post" target="_blank">
+    <input type="text" value="" name="return_no_submit" style="display:none;">
+    <input type="hidden" value="1459493210643" name="orders_begin">
+    <section class="pay">
+       <h2><span>选择支付方式</span></h2>
+       <div class="cyber_bank main_pay clear js_payFirst">
+        <div>
+           <label>
+            <input type="radio" value="weixinpub" name="payType">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/paywx2.png"></label>
+           <label>
+            <input type="radio" name="payType" value="alipay" checked="checked">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/alipayn2.png"></label>
+           <label>
+            <input type="radio" value="unionpayacp" name="payType">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/unionpay2.png"></label>
+           <label>
+            <input type="radio" value="tenpay" name="payType" checked="checked">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/tenpay2.png" class="checked"></label>
+         </div>
+      </div>
+       <div class="cyber_bank clear js_paySecond">
+        <hgroup>网银支付</hgroup>
+        <div>
+           <label>
+            <input type="radio" name="payType" value="tenpay_icbc_d">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/icbc.png"></label>
+           <label>
+            <input type="radio" name="payType" value="tenpay_ccb_d">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/ccb.png"></label>
+           <label>
+            <input type="radio" name="payType" value="tenpay_boc_d">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/boc.png"></label>
+           <label>
+            <input type="radio" name="payType" value="tenpay_comm_d">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/comm.png"></label>
+           <label>
+            <input type="radio" name="payType" value="tenpay_cmb_d">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/cmb.png"></label>
+           <label>
+            <input type="radio" name="payType" value="tenpay_spdb_d">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/spdb.png"></label>
+           <label>
+            <input type="radio" name="payType" value="tenpay_cib_d">
+            <img src="http://{$Think.config.PUBLIC}/mall/images/cib.png"></label>
+         </div>
+      </div>
+     </section>
+    <input id="addressId" name="addressId" type="hidden" value="">
+    <!--用户收获地址ID-->
+    <input id="amount" name="amount" type="hidden" value="1904.00">
+    <!--总价-->
+    <input id="coupons_code" name="coupons_code" type="hidden" value="">
+    <!--优惠券-->
+    <input id="token" name="token" type="hidden" value="EqZOVmvA-txEHYiNBjU6OueLzRqdADx0-e0o">
+    <!-- CSRF token -->
+    <input name="isYph" type="hidden" value="">
+    
+    <!--是否含有限时抢商品 -->
+    <input name="has_xsq_product" type="hidden" value="">
+    <!--优品汇-->
+    <section class="dingdan cart" data-youhui="doing">
+       <h2 class="borb"> <span>确认订单信息</span> <a href="http://cart.zhe800.com/">返回购物车修改</a> </h2>
+       <!-- <div class="ddtips">
+                    XXXXX、XXXXX...商品信息有误，请联系卖家，页面将在5秒内返回购物车页，如果页面没有自动跳转,请点击
+                    <a href="#">返回购物车修改</a>
+                </div> -->
+       
+       <div class="head clear">
+        <p class="products">宝贝</p>
+        <p class="type">规格</p>
+        <p class="price">单价（元）</p>
+        <p class="number">数量</p>
+        <p class="money">小计(元)</p>
+        <p class="freight">运费(元)</p>
+      </div>
+       <div class="item" data-items-type="item" data-seller-id="1534273">
+        <div class="hd">
+           <div class="l"> <span class="name">扬名商贸服饰特卖店</span> <span class="im_icon" data-seller-jid="1534273#0">
+             <iframe src="./confirm_cart_files/init.html" frameborder="no" scrolling="no" style="border: none; width: 80px; height: 24px;"></iframe>
+             </span> </div>
+         </div>
+        <table>
+           <tbody>
+            <tr data-behavior="show-stat" data-stat-sourcetype="zhe" data-stat-pos-type="order" data-stat-pos-value="cart" data-zid="ze160229111136189030" data-stat-dealid="" data-items-type="product" data-product-id="ze160229111136189030" data-cur-price="119.00" data-sku-num="1-1004:2-1106" data-postage="0.00" data-count="10" data-wi="8945111457840770379XucS9iov" data-province-id="110000" data-is-yph="2" data-is-ppt="0" data-brandid="-1" data-islightaudit="0" data-conditionalreturn="0" data-stat-x="1" data-stat-y="1" data-stat-n="1" data-ssid="SS14594946888903418">
+               <td><div class="products">
+                   <figure>
+                    <input type="hidden" name="imagesUrl" value="800x800.a99df61e4357ce26d5ee2a4616b9fadb.jpg">
+                    <a target="_blank" href="http://out.zhe800.com/jump?url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze160229111136189030&jump_source=1&qd_key=qyOwt6Jn"> <img src="http://{$Think.config.PUBLIC}/mall/images/800x800.a99df61e4357ce26d5ee2a4616b9fadb.58x58.jpg"></a> </figure>
+                   <h3> <a target="_blank" href="http://out.zhe800.com/jump?url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze160229111136189030&jump_source=1&qd_key=qyOwt6Jn">花花公子男士夹克外套 中老年夹克三款可选 爸爸装大码新款上衣</a> <em class="yph" title="优品汇"></em><em class="return" title="本商品支持8天无理由退货"></em><em class="audit0" title="本商品由折800买手砍价"></em> </h3>
+                 </div></td>
+               <td><div class="type">
+                   <p> 颜色: 68款蓝色<br>
+                    尺码: 185/XXL<br>
+                  </p>
+                 </div></td>
+               <td><div class="price" cur_price="11900">
+                   <p><b>￥119.00</b></p>
+                   <p>￥<del>498.00</del><em>(2.4折)</em></p>
+                 </div></td>
+               <td><div class="number">10</div></td>
+               <td><div class="moneybox">￥<i class="money">1190.00</i></div></td>
+               <td class="hidden"><div class="freight" data-post-type="1" data-no-free="460000,540000,630000,640000,650000" data-first-post-price="20.00" data-add-post-price="20.00"> <span class="by"> <em>包邮</em> </span>
+                   <div class="fromaddress">从北京市发货</div>
+                 </div></td>
+               <td rowspan="4" class="lasttd"><div class="freight_heji"> <span class="by"> <em>包邮</em> </span>
+                   <div class="fromaddress">从北京市发货</div>
+                 </div></td>
+             </tr>
+            <tr data-behavior="show-stat" data-stat-sourcetype="zhe" data-stat-pos-type="order" data-stat-pos-value="cart" data-zid="ze160229111136189030" data-stat-dealid="" data-items-type="product" data-product-id="ze160229111136189030" data-cur-price="119.00" data-sku-num="1-1005:2-1103" data-postage="0.00" data-count="2" data-wi="8945111457840770379XucS9iov" data-province-id="110000" data-is-yph="2" data-is-ppt="0" data-brandid="-1" data-islightaudit="0" data-conditionalreturn="0" data-stat-x="2" data-stat-y="1" data-stat-n="2" data-ssid="SS1459494688892247">
+               <td><div class="products">
+                   <figure>
+                    <input type="hidden" name="imagesUrl" value="800x800.33dbcb54b5f2c959af7e07aa26b4c6bf.jpg">
+                    <a target="_blank" href="http://out.zhe800.com/jump?url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze160229111136189030&jump_source=1&qd_key=qyOwt6Jn"> <img src="http://{$Think.config.PUBLIC}/mall/images/800x800.33dbcb54b5f2c959af7e07aa26b4c6bf.58x58.jpg"></a> </figure>
+                   <h3> <a target="_blank" href="http://out.zhe800.com/jump?url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze160229111136189030&jump_source=1&qd_key=qyOwt6Jn">花花公子男士夹克外套 中老年夹克三款可选 爸爸装大码新款上衣</a> <em class="yph" title="优品汇"></em><em class="return" title="本商品支持8天无理由退货"></em><em class="audit0" title="本商品由折800买手砍价"></em> </h3>
+                 </div></td>
+               <td><div class="type">
+                   <p> 颜色: 69款卡其色<br>
+                    尺码: 175/L<br>
+                  </p>
+                 </div></td>
+               <td><div class="price" cur_price="11900">
+                   <p><b>￥119.00</b></p>
+                   <p>￥<del>498.00</del><em>(2.4折)</em></p>
+                 </div></td>
+               <td><div class="number">2</div></td>
+               <td><div class="moneybox">￥<i class="money">238.00</i></div></td>
+               <td class="hidden"><div class="freight" data-post-type="1" data-no-free="460000,540000,630000,640000,650000" data-first-post-price="20.00" data-add-post-price="20.00"> <span class="by"> <em>包邮</em> </span>
+                   <div class="fromaddress">从北京市发货</div>
+                 </div></td>
+             </tr>
+            <tr data-behavior="show-stat" data-stat-sourcetype="zhe" data-stat-pos-type="order" data-stat-pos-value="cart" data-zid="ze160229111136189030" data-stat-dealid="" data-items-type="product" data-product-id="ze160229111136189030" data-cur-price="119.00" data-sku-num="1-1006:2-1105" data-postage="0.00" data-count="2" data-wi="8945111457840770379XucS9iov" data-province-id="110000" data-is-yph="2" data-is-ppt="0" data-brandid="-1" data-islightaudit="0" data-conditionalreturn="0" data-stat-x="3" data-stat-y="1" data-stat-n="3" data-ssid="SS14594946888946072">
+               <td><div class="products">
+                   <figure>
+                    <input type="hidden" name="imagesUrl" value="800x800.03f498e8aaf7ce5fa39e801b284a6ead.jpg">
+                    <a target="_blank" href="http://out.zhe800.com/jump?url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze160229111136189030&jump_source=1&qd_key=qyOwt6Jn"> <img src="http://{$Think.config.PUBLIC}/mall/images/800x800.03f498e8aaf7ce5fa39e801b284a6ead.58x58.jpg"></a> </figure>
+                   <h3> <a target="_blank" href="http://out.zhe800.com/jump?url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze160229111136189030&jump_source=1&qd_key=qyOwt6Jn">花花公子男士夹克外套 中老年夹克三款可选 爸爸装大码新款上衣</a> <em class="yph" title="优品汇"></em><em class="return" title="本商品支持8天无理由退货"></em><em class="audit0" title="本商品由折800买手砍价"></em> </h3>
+                 </div></td>
+               <td><div class="type">
+                   <p> 颜色: 69款蓝色<br>
+                    尺码: 180/XL<br>
+                  </p>
+                 </div></td>
+               <td><div class="price" cur_price="11900">
+                   <p><b>￥119.00</b></p>
+                   <p>￥<del>498.00</del><em>(2.4折)</em></p>
+                 </div></td>
+               <td><div class="number">2</div></td>
+               <td><div class="moneybox">￥<i class="money">238.00</i></div></td>
+               <td class="hidden"><div class="freight" data-post-type="1" data-no-free="460000,540000,630000,640000,650000" data-first-post-price="20.00" data-add-post-price="20.00"> <span class="by"> <em>包邮</em> </span>
+                   <div class="fromaddress">从北京市发货</div>
+                 </div></td>
+             </tr>
+            <tr data-behavior="show-stat" data-stat-sourcetype="zhe" data-stat-pos-type="order" data-stat-pos-value="cart" data-zid="ze160229111136189030" data-stat-dealid="" data-items-type="product" data-product-id="ze160229111136189030" data-cur-price="119.00" data-sku-num="1-1003:2-1107" data-postage="0.00" data-count="2" data-wi="8945111457840770379XucS9iov" data-province-id="110000" data-is-yph="2" data-is-ppt="0" data-brandid="-1" data-islightaudit="0" data-conditionalreturn="0" data-stat-x="4" data-stat-y="1" data-stat-n="4" data-ssid="SS14594946888967969">
+               <td><div class="products">
+                   <figure>
+                    <input type="hidden" name="imagesUrl" value="800x800.d1403f071cace324dfd7f35a0cd24676.jpg">
+                    <a target="_blank" href="http://out.zhe800.com/jump?url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze160229111136189030&jump_source=1&qd_key=qyOwt6Jn"> <img src="http://{$Think.config.PUBLIC}/mall/images/800x800.d1403f071cace324dfd7f35a0cd24676.58x58.jpg"></a> </figure>
+                   <h3> <a target="_blank" href="http://out.zhe800.com/jump?url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze160229111136189030&jump_source=1&qd_key=qyOwt6Jn">花花公子男士夹克外套 中老年夹克三款可选 爸爸装大码新款上衣</a> <em class="yph" title="优品汇"></em><em class="return" title="本商品支持8天无理由退货"></em><em class="audit0" title="本商品由折800买手砍价"></em> </h3>
+                 </div></td>
+               <td><div class="type">
+                   <p> 颜色: 68款卡其色<br>
+                    尺码: 190/XXXL<br>
+                  </p>
+                 </div></td>
+               <td><div class="price" cur_price="11900">
+                   <p><b>￥119.00</b></p>
+                   <p>￥<del>498.00</del><em>(2.4折)</em></p>
+                 </div></td>
+               <td><div class="number">2</div></td>
+               <td><div class="moneybox">￥<i class="money">238.00</i></div></td>
+               <td class="hidden"><div class="freight" data-post-type="1" data-no-free="460000,540000,630000,640000,650000" data-first-post-price="20.00" data-add-post-price="20.00"> <span class="by"> <em>包邮</em> </span>
+                   <div class="fromaddress">从北京市发货</div>
+                 </div></td>
+             </tr>
+          </tbody>
+         </table>
+      </div>
+       <div class="words">
+        <div class="text_l">
+           <p><b>买家付款后，24小时内发货</b></p>
+           <p> 留言：
+            <input class="js_leavemsg" data-id="buyerComment" name="buyerComment" type="text" value="" placeholder="选填，请填写已与卖家达成一致的说明">
+          </p>
+         </div>
+        <div class="heji">
+           <p class="hidden"><span>商品合计：</span>￥<b spcount="16" data-recount="store_items_price">1904.00</b></p>
+           <p class="hidden"><span>运费：</span>￥<b postprice="0.00" data-recount="store_items_postage">0.00</b></p>
+           <p>&nbsp;</p>
+           <div class="freight-allowance-wrapper" data-seller-id="1534273">
+            <p class="butie"> <span>
+              <input type="checkbox" name="freight_allowance_checked">
+              <em class="all_free">0元领退货补贴券</em> <em class="ps"> <i></i> <em class="info"> <sup></sup>申请8天无理由退货成功，可获得<u class="returnAmount">10</u>元特卖商城优惠券 <br>
+              <a href="http://www.zhe800.com/help_center/detail/465" target="_blank">什么是退货补贴券&gt;&gt;</a> </em> </em>： </span> ￥<b><i data-recount="store_items_freightdata">0.00</i></b></p>
+          </div>
+           <p><span>店铺合计：</span>￥<b><i class="co2" data-recount="store_amount_price">1904.00</i></b></p>
+         </div>
+        <!-- <div style="display:none;" class="leavemsg">
+                    <span class="tip"></span>
+                </div> --> 
+      </div>
+       <div class="coupons">
+        <h2>选择优惠方式<ins>优惠券和积分不能同时使用</ins></h2>
+        <div class="hidepanel">
+           <p class="hd"> <a href="javascript:void(0);"> <i></i> 使用优惠券<ins class="text_grey">(您有0张优惠券)</ins> </a> </p>
+           <div class="coupons_ps" style="display:none;">
+            <p><a href="http://shop.zhe800.com/my/coupons" target="_blank">查看优惠券使用规则</a></p>
+          </div>
+           <ul>
+            <li style="color:#e12e2f;"><span>您目前没有优惠券</span></li>
+          </ul>
+           <div class="yhqdhdinput" style="display:none;">
+            <input id="couponCode" type="text" class="gint" value="若有优惠券兑换码可在此输入" title="若有优惠券兑换码可在此输入" autocomplete="off" onfocus="this.value==this.title?this.value=&#39;&#39;:null" onblur="this.value==&#39;&#39;?this.value=this.title:null">
+            <input id="couponSubmit" type="button" value="兑换">
+            <a class="shuoming" target="_blank" href="http://help.zhe800.com/detail/112">什么是优惠券兑换码&gt;&gt;</a><ins></ins></div>
+         </div>
+        <div class="integral_panel clear"> <i></i>
+           <label>使用积分</label>
+           <ins class="text_grey">您有0积分</ins> </div>
+      </div>
+     </section>
+    <section class="confirminfo">
+       <div class="txt"></div>
+       <div class="payinfo">
+        <div class="blockl l">
+           <div class="times">由于抢购人数众多，但商品库存有限，订单提交后请在<b>30分钟</b>内支付，超时将自动取消订单</div>
+           <div class="agreement">
+            <input type="checkbox" checked="true">
+            我已阅读并同意<a href="http://help.zhe800.com/detail/82" target="_blank">《折800特卖商城服务协议》</a></div>
+           <p><a href="http://cart.zhe800.com/">&lt;&lt;返回购物车修改</a></p>
+         </div>
+        <div class="blockr r">
+           <div class="heji">
+            <p class="hidden"><span>商品总计：</span>￥<b data-recount="order_items_price">1904.00</b></p>
+            <p class="hidden"><span>运费总计：</span>￥<b postprice="0" data-recount="order_items_postage">0.00</b></p>
+            <p class="hidden"><span>运费险总计：</span>￥<b data-recount="order_items_fi_price">0.00</b></p>
+            <p>&nbsp;</p>
+          </div>
+           <!--                     <div class="hejitxt"><b class="b"> 可获得积分: <i class="returnPoints" data-recount="order_items_scores">--</i> </b>实付款：<em> ￥ <i class="a_paid" data-recount="order_pay_price">--</i></em></div> -->
+           <div class="hejitxt"> <span class="heavy" style="margin-right:20px">共&nbsp;<i class="text_red red">16</i>&nbsp;件</span><b class="b" style="display:none;">，可获得积分: <i class="returnPoints">200</i> </b>实付款：<em> ￥ <i class="a_paid">1904.00</i></em>
+            <p class="sucadress hidden"> <strong>邮寄至：</strong><span id="tarAddress">&nbsp;&nbsp;</span><br>
+               <strong>收货人：</strong><span id="tarPerson"></span> <span id="tarMobile"></span> </p>
+          </div>
+         </div>
+      </div>
+       <div class="btnbox"> <span class="pay_msgbox"></span>
+        <input type="button" class="gbtn btn1 submit_pay" data-behavior="create-cart-order" value="提交订单">
+        <a class="d_link" target="_blank" href=""> <span id="awindowopen"></span> </a> </div>
+     </section>
+  </form>
+ </article>
+<div style="display:none;"> <a href="http://shop.zhe800.com/help_center/faq/BPOS0002" id="right_faq"></a> </div>
+
+<footer>
+   <p> <a target="_blank" href="http://www.zhe800.com/contact">关于我们</a> | <a target="_blank" href="http://hr.tuan800.com/brand">诚聘英才</a> | <a target="_blank" href="http://www.zhe800.com/service_terms">服务条款</a> | <a target="_blank" href="http://www.zhe800.com/n/jubao">廉正举报</a> | <a target="_blank" href="http://www.zhe800.com/n/help/zhe800_description">消费者保障</a> | <a target="_blank" href="http://www.zhe800.com/friendly_links">友情链接</a> | <a href="javascript:void(0)" class="feedback_popup_handler">意见反馈</a> | <a href="javascript:void(0)">在线客服</a></p>
+   <a href="http://www.miibeian.gov.cn/" target="_blank" style="color:#999" rel="nofollow">京ICP证120075号</a> 京ICP备10051110号-5 <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502025623" target="_blank" rel="nofollow">京公网安备11010502025623</a> 食品流通许可证SP1101051510352397 Copyright©2011-2015 版权所有 ZHE800.COM <br>
+   <a href="http://www.itrust.org.cn/yz/pjwx.asp?wm=3571298269" target="_blank" rel="nofollow"><img width="70" height="26" src="http://{$Think.config.PUBLIC}/mall/images/web_trust.png"></a><a id="___szfw_logo___" href="https://search.szfw.org/cert/l/CX20150121006886006587" target="_blank" rel="nofollow"><img src="http://{$Think.config.PUBLIC}/mall/images/cert.jpg" width="70" height="26" style="border:0"></a><a target="_blank" href="https://ss.knet.cn/verifyseal.dll?sn=e150522110105588321uva000000&ct=df&a=1&pa=0.14795242729201963" rel="nofollow"><img width="76" height="28" style="border:0" src="http://{$Think.config.PUBLIC}/mall/images/credit.png"></a><script type="text/javascript">(function(){document.getElementById('___szfw_logo___').oncontextmenu = function(){return false;}})();</script> 
+ </footer>
+
+</body>
+</html>
+<script type="text/javascript">
+$(document).ready(function(){
+  //alert(area_array[0]);
+  //获取指定地区的子地区
+  $(".citylistinfo").css("display","block");
+  $(".txt").click(function(){
+      $(".citylistinfo").css("display","block");
+  });
+  $(".provbox a").on("click",function(){
+      var pid = $(this).attr("pid").substr(0,2);//获取选中的地区代码
+	  var name = $(this).text();//获取选择的地区名称
+	  //alert(name);
+	  $(".citylists p span").text(name);
+      $(".hd span").removeClass("cur");
+      $(".hd span:eq(1)").addClass("cur");
+      $(".provbox").hide();
+      //获取市级地区
+      alert(pid);
+      //alert(sub_array[pid][1101]);
+      $(sub_array[pid]).each(function(){
+            alert($(this).val());
+      });
+  });
+});
+ </script>

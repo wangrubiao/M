@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>我的购物车 - 折800特卖商城</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link href="http://{$Think.config.PUBLIC}/lib/layui/css/layui.css" rel="stylesheet">
+<link rel="stylesheet" href="http://{$Think.config.PUBLIC}/mall/style/cart.css">
+
+</head>
+<body>
+<!-- Top -->
+{include file="public/top" /}
+<!-- Top end -->
+
+<header>
+  <div class="area">
+    <div class="l"> <a href="#/"> <img src="__PUBLIC__/{$Think.config.projectName}/images/logo2015cart.png"></a> <br>
+      折800，精选每日优质淘品</div>
+    <div class="order_r"></div>
+  </div>
+</header>
+<article class="area" id="cart">
+  <div id="cart_panel_wrapper">
+    <div class="title clear">
+      <div class="righti"><span></span></div>
+      <p class="l">购物车<b class="count"><i data-recount="items-count">{$list|count}</i></b></p>
+    </div>
+    
+    
+    <section id="cart_items_panel" class="itemlist clear">
+      <form>
+        <div class="head clear">
+          <p class="all">
+            <input type="checkbox" checked="checked">
+           <span><a href="http://cart.zhe800.com/cart#" data-toggle="cart-select-all">全选</a></span></p>
+          <p class="products">商品</p>
+          <p class="price">单价（元）</p>
+          <p class="number">数量</p>
+          <p class="money">金额（元）</p>
+          <p class="operation">操作</p>
+        </div>
+        <div class="item" data-type="cart-item" data-seller-id="1191932" data-fresh="on"> 
+          <!-- 全部操作 -->
+          <div class="hd">
+            <div class="r" data-discount-desc="status"><span class="co1">已享受满200元减10元优惠</span><a class="js_dsc" href="#" target="_blank">更多商品&gt;&gt;</a></div>
+            <div class="discount-rule r" data-discount-desc="rule">
+              <p class="type"><i>满减</i>满200元减10元</p>
+            </div>
+            <div class="l"> <a target="_blank" class="js_utm_params" href="#"><i></i><span class="name">左珞斯品牌服饰</span></a> <span class="im_icon">
+              <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=2278906920&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2278906920:51" alt="QQ咨询" title="QQ咨询"></a>
+              </span> </div>
+          </div>
+          <!-- 全部操作 end-->
+          <table>
+            <tbody>
+
+              {foreach name="list" item="vo"}
+              <tr data-behavior="show-stat" data-stat-dealid="3561149" data-sku-id="{$vo.id}" data-stat-sourcetype="zhe" data-stat-pos-type="cart" data-stat-pos-value="valid" class="item-selected" data-product-id="ze151020141220000658" data-stat-x="4" data-stat-y="1" data-stat-n="4" data-ssid="SS14589704236868259">
+                <td class="cb">
+                    <input type="checkbox" name="cart_key" value="ze151020141220000658|1-1001:2-1108" data-is-yph="1" checked="checked">
+                </td>
+
+                <td><div class="products">
+                    <figure><a class="abc" href="#" target="_blank"><img src="{$vo.img_url}" data-origin="http://z3.tuanimg.com/imagev2/trade/800x800.ef97f14b841b8b2a5315967e00bce4a3.100x100.jpg" data-stat-dealid="3561149"></a></figure>
+                    <h3> <a href="http://out.zhe800.com/jump?deal_id=3561149&url=http%3A%2F%2Fshop.zhe800.com%2Fproducts%2Fze151020141220000658&jump_source=1&qd_key=qyOwt6Jn" target="_blank">嬉皮少女2015秋冬新款修身显瘦百搭牛仔裤小脚女裤铅笔裤女长裤潮</a> <em class="pro_ppt" title="品牌团"></em><em class="return" title="本商品支持8天无理由退货"></em><em class="audit0" title="本商品由折800买手砍价"></em> </h3>
+                    <div class="type">
+                      <div class="icon-wrapper"><span class="icon-sku-edit" data-behavior="cart-item-modify">修改</span></div>
+                      <input type="hidden" name="cart_price" value="69">
+                      <input type="hidden" name="sku_num" value="1-1001:2-1108">
+                      <input type="hidden" name="sku_num_new" value="1-1001:2-1108">
+                      <div data-prop="sku-desc">颜色:{$vo.spec_name}</div>
+                      <div data-prop="sku-desc">尺码:{$vo.focus_name}</div>
+                      <div class="nubA item-modify-wrapper"></div>
+                    </div>
+                  </div></td>
+
+                <td><div class="price">
+                    <p><del data-price="original">182.00</del></p>
+                    <p><b data-price="unit">{$vo.spec_mey}</b></p>
+                    <div class="time_z tz1">限时<span class="discount">3.8</span>折
+                      <time data-start-time="1458781200000" data-end-time="1459612740000" data-now-time="1458970849755">7天10小时18分11秒</time>
+                    </div>
+                  </div></td>
+
+                <td>
+                  <div class="number">
+                    <p data-total-count="{$vo.spec_stock}" data-lock-count="0" data-sku-count="20">
+                      <i class="decrease" data-sku="id_{$vo.id}">-</i>
+                      <input type="text" data-behavior="cart-count-input" name="count" value="{$vo.num}" data-value="{$vo.num}" class="id_{$vo.id}" disabled>
+                      <i class="increase" data-sku="id_{$vo.id}">+</i>
+                    </p>
+                    <var class="err" style=""></var>
+                  </div>
+                </td>
+
+                <td><div class="money" data-unit-original-price="546.00" data-recount="item-price">{$vo.count}.00</div></td>
+                <td><div class="operation"><a href="#" data-behavior="cart-item-delete" data-sku-id="{$vo.id}">删除</a></div></td>
+              </tr>
+              {/foreach}
+
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </section>
+  {empty name="list"}
+<section id="no_items_panel" class="cart_undefined clear">
+      <div class="dlncnl"> <i class="un_cart_i"></i>
+        <div class="txt">您的购物车还空着呢~<br>
+          宝贝这么多~</div>
+        <a href="#">去逛逛</a> </div>
+    </section>
+{/empty}
+    
+    <section id="cart_recount" class="area submitbox">
+      <div class="fixedbox fixed">
+        <p class="all"><i class="checkbox on" data-behavior="checkbox" data-toggle="cart-select-all" data-checked="on">
+          <label for=""></label>
+          <input type="checkbox" checked="checked">
+          </i><span>
+          <a href="javasrcipt:;" data-toggle="cart-select-all">全选</a>
+          <a href="javasrcipt:;" class="del" data-behavior="cart-items-delete">批量删除</a>
+          </span></p>
+        <div class="r"> 
+        <span class="amount">共<b data-recount="items-amount">19</b>件</span>
+        <span>总计（不含运费）：<strong>￥<i data-recount="amount-price">1751.00</i></strong></span> 
+        <a href="javascript:;" class="accounts">结算</a> </div>
+      </div>
+    </section>
+  </div>
+  <section class="recommend area" data-dealids="3561149.3561149.3561149.3561149.3561149.3325263.3325263.3325263.3325263">
+    <div class="hd"><span>您可能还需要</span></div>
+    <ul>
+      <li data-behavior="show-stat" data-stat-pos-type="recom" data-stat-pos-value="cart_bottom" data-zid="ze160302193811205644" data-stat-dealid="3492279" data-stat-sourcetype="zhe" data-stat-x="1" data-stat-y="1" data-stat-n="1" data-ssid="SS14589704280873702"><a target="_blank" href="http://out.zhe800.com/ju/deal/2016kuan_3492279?utm_content=cart"><img src="./cart_files/700x700.de685c6c6cf138e652ffab6bb1f45ada.180x180.jpg.webp"></a>
+        <h3><a target="_blank" href="http://out.zhe800.com/ju/deal/2016kuan_3492279?utm_content=cart">棉质翻领加大版胖子男夹克</a></h3>
+        <p><b>￥138</b>新品上架</p>
+      </li>
+      
+      <li data-behavior="show-stat" data-stat-pos-type="recom" data-stat-pos-value="cart_bottom" data-zid="ze160227190559183901" data-stat-dealid="3407571" data-stat-sourcetype="zhe" data-stat-x="1" data-stat-y="5" data-stat-n="5" data-ssid="SS14589704281027227"><a target="_blank" href="http://out.zhe800.com/ju/deal/zhongniann_3407571?utm_content=cart"><img src="./cart_files/700x700.f584212a5e8dc5b76d729eae19f9722d.180x180.jpg.webp"></a>
+        <h3><a target="_blank" href="http://out.zhe800.com/ju/deal/zhongniann_3407571?utm_content=cart">中年男士夹克外套2016春款男装薄款休闲修身夹克衫西装领外套男</a></h3>
+        <p><b>￥88</b>新品上架</p>
+      </li>
+     
+      <li data-behavior="show-stat" data-stat-pos-type="recom" data-stat-pos-value="cart_bottom" data-zid="ze151215145819001453" data-stat-dealid="3429143" data-stat-sourcetype="zhe" data-stat-x="2" data-stat-y="5" data-stat-n="10" data-ssid="SS14589704281067654"><a target="_blank" href="http://out.zhe800.com/ju/deal/hebianluzh_3429143?utm_content=cart"><img src="./cart_files/700x700.2808cf14b34a44a4438dc407447374fa.180x180.jpg.webp"></a>
+        <h3><a target="_blank" href="http://out.zhe800.com/ju/deal/hebianluzh_3429143?utm_content=cart">河边鹿中老年男棉衣外套</a></h3>
+        <p><b>￥79.9</b>新品上架</p>
+      </li>
+    </ul>
+  </section>
+  <!-- login -->
+  <section class="modal">
+  	账号：<input type="text" name="account" value="" />
+  	密码：<input type="text" name="password" value="" />
+  	<button class="login">登 录</button><button class="reg">注 册</button>
+  </section>
+   <!-- login end -->
+</article>
+<!-- footer -->
+{include file="public/_footer" /}
+<!-- footer end -->
+	<script src="http://{$Think.config.PUBLIC}/mall/js/jquery-2.1.1.js"></script>
+ <!-- layui scripts -->
+<script src="http://{$Think.config.PUBLIC}/lib/layui/layui.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	layui.use('layer', function(){
+		//点击结算
+		$('.accounts').on('click',function(){
+			var url = '{:url("login/ajaxCheck")}';
+			$.post(url,'',function(data){
+				if(data['status']=="0"){
+					layer.open({
+		                 title:'用户登录',
+		                 type: 1,
+		                 area: ['350px', '350px'],
+		                 shadeClose: false, //点击遮罩关闭
+		                 content: $('.modal'),
+		                 });
+				}else{
+					//Login Success
+					layer.msg("登录成功.这下会跳到付款页面.",{icon:2});
+				}
+			});
+			 
+		});
+		//用户登录
+		$('.login').on('click',function(){
+			var username = $("input[name='account']").val();
+			var password = $("input[name='password']").val();
+			var url = "{:url('login/check')}";
+			if(username==""){
+				layer.msg("请填写用户名",{icon:2});
+				return;
+			}
+			if(password==""){
+				layer.msg("请填写密码",{icon:2});
+				return;
+			}
+			$.post(url,{username:username,password:password},function(data){
+				if(data['status']=="0"){
+					layer.msg("账号或者密码错误",{icon:2});
+				}else{
+					//成功登录
+					location.reload();
+				}
+			});
+		});
+        /*****
+         *增减数量
+         ****/
+        $("tbody tr").mouseover(function(){
+           var count = $(".number p",this).data("total-count");
+           var sku_value = $(".number p input",this);
+           var decrease = $(".decrease",this).unbind();
+           var increase = $(".increase",this).unbind();
+           var err = $(".err",this);
+           var price = $(".price b",this).text(); //产品单价
+           var money = $(".money",this);  //产品总价
+           var sku_id = $(this).data("sku-id");
+           var checkdel = $(".operation a",this);
+          //减去数量
+          $(sku_value).keyup(function(){
+            if(sku_value.val()=="" || sku_value.val()==0 ){
+              sku_value.val(1);
+            }
+            var num = parseFloat($(this).val())*price;
+            $(money).text(num.toFixed(2));
+          });
+          $(decrease).click(function(){
+              if(sku_value.val() <= 1){
+                 $(decrease).addClass("no-drop");
+                $(increase).removeClass("no-drop")
+              }else{
+                $(sku_value).val(parseFloat($(sku_value).val())-1);
+                $(increase).removeClass("no-drop");
+                //更改购物车最新状态
+                var url  = "{:url('Cart/less')}";
+                $.post(url,{sku_id:sku_id},function(data){
+                    if(data['status']){
+                      var num = parseFloat($(sku_value).val())*price;
+                      $(money).text(num.toFixed(2));
+                      if(count >= sku_value.val()){
+                        $(err).text("");
+                      }
+                    }
+                });
+              }
+          });
+          //增加数量
+          $(increase).click(function(){
+            if(sku_value.val() >= count){
+              $(decrease).removeClass("no-drop");
+              $(increase).addClass("no-drop");
+              $(err).text("很抱歉,库存仅剩下"+count+"件");
+              
+            }else{
+              $(decrease).removeClass("no-drop");
+              $(sku_value).val(parseFloat($(sku_value).val())+1);
+              $(sku_value).data("value",(parseFloat($(sku_value).val())+1))
+              //更改购物车最新状态
+                var url  = "{:url('Cart/add')}";
+                $.post(url,{sku_id:sku_id},function(data){
+                    if(data['status']){
+                      var num = parseFloat($(sku_value).val())*price;
+                      $(money).text(num.toFixed(2));
+                    }
+                });
+            }
+          });
+          return false;
+        });
+      /*****
+       *删除商品
+      ****/
+      $(".operation a").on("click",function(){
+          var sku_id = $(this).data("sku-id");
+          var url  = "{:url('Cart/del')}";
+          layer.confirm('是否删除该商品?', {
+            title: "温馨提示",
+            btn: ['确定','取消'] //按钮
+          }, function(){
+              $.post(url,{sku_id:sku_id},function(data){
+                if(data['status']){
+                  $("tr[data-sku-id="+sku_id+"]").hide(1000,function(){
+                      layer.msg('删除成功', {icon: 1});
+                      $(".count i").text(data['content']);
+                  });
+                  
+                }
+             });
+          }, function(){
+            //取消
+          });
+      });
+	 });
+});
+</script>

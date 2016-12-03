@@ -1,0 +1,202 @@
+<!-- Header -->
+{include file="public/header" /}
+<!-- Header end -->
+<body>
+
+	<div id="wrapper">
+		<!-- Header -->
+		{include file="public/menu" /}
+		<!-- Header end -->
+
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom">
+				<!-- Header -->
+				{include file="public/top" /}
+				<!-- Header end -->
+			</div>
+			<div class="row wrapper border-bottom white-bg page-heading">
+				<div class="col-lg-10">
+					<h2>FooTable</h2>
+					<ol class="breadcrumb">
+						<li><a href="index.html">Home</a></li>
+						<li><a>Tables</a></li>
+						<li class="active"><strong>FooTable</strong></li>
+					</ol>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+			<div class="wrapper wrapper-content animated fadeInRight">
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>订单管理</h5>
+
+								<div class="ibox-tools">
+									<a class="collapse-link"> <i class="fa fa-chevron-up">行情分析</i>
+									
+									</a> <a class="dropdown-toggle" data-toggle="dropdown"
+										href="table_foo_table.html#"> <i class="fa fa-wrench"></i>
+									</a>
+									<ul class="dropdown-menu dropdown-user">
+										<li><a href="table_foo_table.html#">Config option 1</a></li>
+										<li><a href="table_foo_table.html#">Config option 2</a></li>
+									</ul>
+
+								</div>
+							</div>
+							<div class="ibox-content">
+
+								<table class="footable table table-stripped toggle-arrow-tiny"
+									data-page-size="8">
+									<thead>
+										<tr>
+
+											<th data-toggle="true">订单号</th>
+											<th>消费日期</th>
+											<th>总金额</th>
+											<th data-hide="all">付款方式：</th>
+											<th>优 惠</th>
+											<th>操 作</th>
+										</tr>
+									</thead>
+									<tbody>
+										{foreach name="list" item="vo"}
+										<tr>
+											<td>{$vo.order}</td>
+											<td>{$vo.buytime|date='Y-m-d h:i:s',###}</td>
+											<td>{$vo.total}</td>
+
+											<td>
+											{switch name="vo.payment"}
+    											{case value="1"}现金{/case}
+   												{case value="2"}微信{/case}
+   												{case value="3"}支付宝{/case}
+    										{default /}订单取消
+											{/switch}
+											</td>
+
+											<td>{$vo.discount}</td>
+											<td><a href="javasrcipt:;" class="" title="废除订单"
+												data-id="{$vo.id}"><i class="fa fa-trash-o text-navy"></i></a>&nbsp;
+												<a href="javasrcipt:;" class="msg" title="订单明细"
+												data-id="{$vo.id}"><i class="fa fa-eye text-navy"></i></a></td>
+										</tr>
+										{/foreach}
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="5">
+												<ul class="pagination pull-right"></ul>
+											</td>
+										</tr>
+									</tfoot>
+								</table>
+								<!-- 订单详细模态框 -->
+								<div class="ibox-content tab-msg" style="display: none;">
+
+									<div class="full-height-scroll"
+										style="overflow: hidden; width: auto; height: 100%;">
+
+										<strong>购物清单</strong>
+
+										<table class="table">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>名 称</th>
+													<th>重量/kg</th>
+													<th>价 格</th>
+												</tr>
+											</thead>
+											<tbody class="goodslist">
+												<!-- 清单数据 -->
+											</tbody>
+
+										</table>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>总价:<span class="total"><span/></th>
+													<th>优惠:<span class="discount"></span></th>
+													<th>积分:<span class="integral"></span></th>
+												</tr>
+											</thead>
+											<thead>
+												<tr>
+													<th>实收<span class="receipts"></span></th>
+													<th>应找:<span class="backmey"></span></th>
+													<th></th>
+												</tr>
+											</thead>
+										</table>
+										<strong>时 间：<span class="buytime"></span></strong>
+									</div>
+								</div>
+								<!-- 订单详细模态框 end-->
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- footer -->
+			{include file="public/footer" /}
+			<!-- footer end -->
+
+
+			<!-- FooTable -->
+			<script
+				src="http://{$Think.config.PUBLIC}/js/plugins/footable/footable.all.min.js"></script>
+
+			<!-- Page-Level Scripts -->
+			<script>
+				$(document).ready(function() {
+					layui.use('layer', function() {
+						$('.msg').on('click', function() {
+							var title = $(this).attr('title');
+							var id = $(this).data('id');
+							$.ajaxGoods(id);
+							var index = layer.open({
+								type : 1,
+								title : title,
+								shadeClose : true,
+								shade : 0.8,
+								shift : 3,
+								//  area: ['500px', '100%'],
+								content : $('.tab-msg'),
+								btn : [ '返 回' ],
+								yes : function(index, layero) {
+									layer.close(index);
+								}
+							});
+						});
+					});
+					//ajax获取商品明细
+					$.ajaxGoods = function(id){
+						var url = "{:url('lineorder/goodsList')}";
+						var str = '';
+						$.post(url,{id:id},function(data){
+							$(data).each(function(index){
+								str += "<tr><td>"+(index+1)+"</td><td>"+data[index]['name']+"</td><td>"+data[index]['weight']+"</td><td>"+data[index]['price']+"</td></tr>";
+							});
+							$('.total').text(data[0]['total']);
+							$('.discount').text(data[0]['discount']);
+							$('.receipts').text(data[0]['receipts']);
+							$('.backmey').text(data[0]['backmey']);
+							$('.integral').text(data[0]['integral']);
+							$('.buytime').text($.getLocalTime(data[0]['buytime']));
+							$('.goodslist').html(str);
+						});
+					};
+					//将时间戳转成日期
+					$.getLocalTime = function(nS) {     
+					       return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");      
+					 }
+					$('.footable').footable();
+				});
+			</script>
+</body>
+
+</html>
