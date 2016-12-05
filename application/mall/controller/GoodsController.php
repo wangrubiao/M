@@ -17,17 +17,17 @@ use app\admin\model\MallGoods as MallGoodsModel;
 
 class GoodsController extends CommonController {
 	/**
-	 * ���Menu
+	 * 渲染商品详细页
 	 * 
-	 * @access protected
+	 * @access public
 	 * @param Request $request        	
-	 * @return array
+	 * @return viwe
 	 */
 	public function index(Request $request) {
 		extract(input());
+        empty($gid)?die('Commodity does not exist!'):$gid;
 		$result = model('MallGoods')->goods($gid);
-		//p($result);
-		
+        count($result)==0?die('错误的商品 ID!'):$result;
 		//根据主图数量组合数组
 		foreach($result as $key => $item){
 			$imgList[]['picture'] = $item['img_url'];
