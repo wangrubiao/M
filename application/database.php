@@ -13,13 +13,13 @@ return [
     // 数据库类型
     'type'           => 'mysql',
     // 服务器地址
-    'hostname'       => '127.0.0.1',
+    'hostname'       => '120.24.186.143',
     // 数据库名
     'database'       => 'wangjia',
     // 用户名
-    'username'       => 'root',
+    'username'       => 'wangjia',
     // 密码
-    'password'       => 'root',
+    'password'       => '06291013',
     // 端口
     'hostport'       => '',
     // 连接dsn

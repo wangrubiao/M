@@ -27,7 +27,6 @@ class User extends Model {
 		}else{
 			$where['admin_id'] =  array('eq',$uid);
 			$array = Db::view ( 'auth_user', 'admin_id,auth_group_id' )->view ( 'auth_group', [
-					'id',
 					'aname',
 					'range_id'
 			], 'auth_group.id=auth_user.auth_group_id' )->where ( $where )->select();
