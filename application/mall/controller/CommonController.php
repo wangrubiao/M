@@ -16,6 +16,7 @@ use think\Request;
 use think\Db;
 
 class CommonController extends Controller {
+    public $uid;
 	public function __construct(Request $request) {
 		parent::__construct ();
 		//p($request->session());
@@ -25,6 +26,7 @@ class CommonController extends Controller {
 			$this->redirect('Login/index');
 		}
 		*/
+		$this->uid = $request->session ( 'mall_info.uid' );
 		$this->assign('username',$request->session('mall_info.username'));
 	}
 	/**
