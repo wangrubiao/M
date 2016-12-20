@@ -1,11 +1,19 @@
 <?php
-
+// +----------------------------------------------------------------------
+// | W+ [ Not the same fireworks ]
+// +----------------------------------------------------------------------
+// | Describe: 商品 AND 分类
+// +----------------------------------------------------------------------
+// | Time: 2016/11/18
+// +----------------------------------------------------------------------
+// | Author: 64941334@qq.com
+// +----------------------------------------------------------------------
 namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use think\Db;
 use think\Session;
-use app\admin\model\User as UserModel;
+use app\admin\model\LineGroup;
 
 class LinegoodsController extends AuthController {
 	
@@ -13,11 +21,19 @@ class LinegoodsController extends AuthController {
 		$result = Db::name('line_goods')->select();
 		$this->assign('list',$result);
 		return view('admin/line/goodsList');
-		//p($result);
 	}
+
+    /**
+     * 删除商品
+     * @为了后期统计精度，删除暂时不支持
+     */
 	public function delete(){
 		
 	}
+    /**
+     * 新增商品
+     * @return mixed
+     */
 	public function insert(){
 		is_ajax();
 		extract(input());
@@ -38,6 +54,11 @@ class LinegoodsController extends AuthController {
 		}
 		return $data;
 	}
+
+    /**
+     * 更新商品
+     * @return mixed
+     */
 	public function update(){
 		is_ajax();
 		extract(input());
@@ -57,5 +78,11 @@ class LinegoodsController extends AuthController {
 			$data['content'] = '更新成功.';
 		}
 		return $data;
+	}
+
+	public function calss(){
+        $group = new LineGroup();
+        $list = $group->calssList();
+	    dump($list);
 	}
 }

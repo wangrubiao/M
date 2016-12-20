@@ -1,0 +1,208 @@
+<!-- Header -->
+{include file="public/header" /}
+<!-- Header end -->
+<body>
+
+    <div id="wrapper">
+
+  <!-- Header -->
+				{include file="public/menu" /}
+				<!-- Header end -->
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+   		<!-- Header -->
+				{include file="public/top" /}
+				<!-- Header end -->
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Static Tables</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a>Tables</a>
+                        </li>
+                        <li class="active">
+                            <strong>Static Tables</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+           
+            <div class="row">
+               
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>商品列表</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="table_basic.html#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="table_basic.html#">Config option 1</a>
+                                    </li>
+                                    <li><a href="table_basic.html#">Config option 2</a>
+                                    </li>
+                                </ul>
+                               
+                                {in name="16" value="$rangeList" }
+                                 <a class="add" title="新增商品">
+                                    <i class="fa fa-plus-square"></i>
+                                 </a>
+                                 {/in}
+				
+                               
+                                
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                               		<th>商 品</th>
+                                    <th>单 价</th>
+                                    <th>所属分组</th>
+                                    
+                                    {in name="15" value="$rangeList" }
+                                    <th>操 作</th>
+                                    {/in}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach name="list" item="vo"}
+                                <tr class="e{$vo.gid}">
+                                    <td class="gid-{$vo.gid}">{$vo.gid}</td>
+                                     <td class="name-{$vo.gid}">{$vo.name}</td>
+                 	               <td class="gds_price-{$vo.gid}">{$vo.gds_price}</td>
+                                     <td class="group-{$vo.gid}">{$vo.group}</td>
+                                    {in name="15" value="$rangeList" }
+                                     
+                                   <td>
+                                   <a href="javasrcipt:;" title="商品编辑" class="edit" data-id="{$vo.gid}"><i class="fa fa-pencil-square-o text-navy"></i></a>
+                                   </td>
+                               		{/in}
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                          <!-- 模态框 编辑  -->
+                        <div class="ibox-content ibox-from" style="display:none;">
+                       <!--   <h2>注意事项：</h2>
+                            <p>你知道吗？管理员是不支持删除的，不需要可以选择冻结.</p>-->
+                                <form role="form" id="form">
+                                    <div class="form-group"><label>商品名称</label> <input type="text" placeholder="商品名称..." class="form-control" name="name"></div>
+                                    <div class="form-group"><label>商品价格</label> <input type="text" placeholder="商品单价..." class="form-control" name="gds_price"></div>
+                                    <div class="form-group"><label>商品分组</label> <input type="text" placeholder="商品分组" class="form-control" name="group"></div>
+                                </form>
+                        </div>
+                       <!-- 模态框 编辑 end -->
+                        <!-- 模态框 角色分配  -->
+                        <div class="ibox-content ibox-group" style="display:none;">
+						  <div class="form-group grouplist">
+                               
+                           </div>
+                        </div>
+                       <!-- 模态框 角色分配 end -->
+                        </div> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- footer -->
+{include file="public/footer" /}
+<!-- footer end -->
+    <script>
+        $(document).ready(function(){
+        	layui.use('layer', function(){
+        	//编辑商品
+        	$(".edit").on('click',function(){
+        		$("#form").data("id",$(this).data("id"));
+        		$.action($(this),"edit");
+        	});
+        	//创建商品
+        	$(".add").on('click',function(){
+        		$.action($(this),"add");
+        	});
+        	$.action = function(obj,type) {
+ 				//模态框数据初始化
+        		var title = $(obj).attr("title");
+ 				var gid = $(obj).data("id");
+        		$("input[name='name']").val($(".name-"+gid).text());
+        		$("input[name='gds_price']").val($(".gds_price-"+gid).text());
+        		$("input[name='group']").val($(".group-"+gid).text());
+            		var index = layer.open({
+            			  type: 1,
+            			  title: title,
+            			  shadeClose: true,
+            			  shade: 0.8,
+            			  shift: 3,
+            			  content: $('.ibox-from'),
+            			  btn: ['确 定', '取 消']
+            			  ,yes: function(index, layero){
+            				  if(type == "edit"){
+            					  //var id = $("#form").data("id");
+            					  var url = "{:url('linegoods/update')}";
+            					  $.excAjax(gid,url,index);
+            	        	   }else{
+            	        		  var id = 0;
+              					  var url = "{:url('linegoods/insert')}";
+              					  $.excAjax(id,url,index);
+            	        		}
+            			  }
+            		}); 
+            	 
+  			}
+        	//模态框Ajax提交操作
+        	$.excAjax = function(id,url,index){
+				  var name = $("input[name='name']").val();
+				  var gds_price = $("input[name='gds_price']").val();
+				  var group = $("input[name='group']").val();
+				  $.post(url,{gid:id,name:name,gds_price:gds_price,group:group},function(data){
+        				if(data['status'] == 1){
+        					if(id==0){
+        						location.reload();
+        						layer.msg(data['content'], {icon: 1});  
+        					}else{
+        						$(".e"+id+" .name-"+id).text(data['name']);
+        						$(".e"+id+" .gds_price-"+id).text(data['gds_price']);
+        						$(".e"+id+" .group-"+id).text(data['group']);
+            					layer.msg(data['content'], {icon: 1});  
+        					}
+        					layer.close(index);
+        				}else{
+        					layer.msg(data['content'],{icon: 2});
+        				}
+        				
+        			});
+        	}
+        	//捕抓鼠标This
+        	$(".expgroup,.edit,.add").mouseenter(function(){
+        		var title = $(this).attr('title');
+        		var index = layer.tips(title, this, {
+        			  tips: [1, '#3595CC'],
+        			  time: 10000,
+        		});
+            	$(this).mouseleave(function(){
+            		layer.close(index);
+            	});
+        	});       	
+            
+        	 });
+        });
+    </script>
+</body>
+
+</html>
