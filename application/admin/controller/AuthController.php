@@ -13,7 +13,7 @@ class AuthController extends CommonController
 		$url = $request->module().'/'.$request->controller().'/'.$request->action();
 		$result = $this->check($url,$request->session('info.uid'));
 		if(!$result){
-			die('没有访问权限！');
+			die('没有访问权限o！');
 			//$this->error('没有访问权限');
 		}
     }
